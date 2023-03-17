@@ -1,0 +1,60 @@
+﻿@model IEnumerable<IT_MVC_Proekt.Models.UsersInRoleViewModel>
+
+@{
+    ViewBag.Title = "ListUsers";
+}
+<style>
+    tbody tr {
+        background-color: #18161d;
+    }
+
+    tbody {
+        border-radius: 5px;
+    }
+
+    td {
+        border: none !important;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+</style>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<table class="table " id="user_table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#user_table").DataTable();
+        })
+    </script>
+
+}

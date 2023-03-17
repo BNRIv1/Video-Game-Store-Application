@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    body,
+    html {
+        padding: 0;
+        margin: 0;
+        padding-bottom: 6rem;
+        width: 100%;
+    }
+
+    .container {
+        margin: auto;
+    }
+
+    .banner {
+        height: 100vh;
+        width: 300px;
+        background-position: center;
+        -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.2));
+        -webkit-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+
+    .banner:hover {
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+    .featured_wrapper {
+        position: relative;
+    }
+
+    .featured_wrapper img {
+        width: 100%;
+        height: 350px;
+        object-fit: contain;
+        margin-top: 100px;
+    }
+
+    .title_wrapper {
+        position: absolute;
+        width: 100%;
+        left: 2rem;
+        bottom: 2rem;
+        padding: 20px 40px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .title_wrapper h1 {
+        width: 70%;
+    }
+
+    button {
+        background: #f40612 !important;
+        color: #fff !important;
+        font-size: 18px;
+        padding: 0.5rem 3rem;
+        outline: none;
+        border: 0 !important;
+    }
+
+    .last {
+        display: flex;
+        width: 1140px;
+        margin: auto;
+        margin-top: 6.5rem;
+        justify-content: space-evenly;
+    }
+
+    .is-one-quarter {
+        margin: 30px;
+    }
+
+    .site-info {
+        font-size: 50px;
+        font-weight: 500;
+        width: 900px;
+        color: aliceblue;
+        z-index: 100;
+        margin: auto;
+        margin-top: 80px;
+        margin-bottom: 80px;
+        text-align: center;
+    }
+
+    .title {
+        margin-top: 80px;
+    }
+
+
+</style>
+<div class="title">
+</div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="item active logo">
+            <img src="~/Content/BNRI12.png" alt="GTA">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="site-info">
+        Welcome to BNRI, the largest online platform for buying video games!
+        Browse through the endless list of video games. Here video game shopping
+        is made simple, fast and cheap. Find the best deals on video games.
+    </div>
+    <div class="columns is-multiline p-0 pt-6 last">
+        <div class="column is-one-quarter">
+            <div class="banner" style="background-image: url(https://i.pinimg.com/originals/78/b9/82/78b9829ba38dbeabf7a96f569d25a2c5.jpg)"></div>
+        </div>
+        <div class="column is-one-quarter">
+            <div class="banner" style="background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700723107.jpg) "></div>
+        </div>
+        <div class="column is-one-quarter">
+            <div class="banner" style="background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700891716.jpg) "></div>
+        </div>
+        <div class="column is-one-quarter">
+            <div class="banner" style="background-image: url(https://gameranx.com/wp-content/uploads/2017/03/Friday-the-13th-1080P-Wallpaper.jpg)"></div>
+        </div>
+    </div>
+
+</div>
+
+

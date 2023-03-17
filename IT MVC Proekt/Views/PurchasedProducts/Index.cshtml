@@ -1,0 +1,210 @@
+﻿@model IEnumerable<IT_MVC_Proekt.Models.PurchasedProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+@if (Model.Count() == 0)
+{
+    <div class="empty-cart">
+        <div class="empty-cart-content">
+            <p class="empty-cart-title">Your cart is empty!</p>
+            <p class="empty-cart-text">You have no items in your cart. Go back to the list of games to add items in your cart.</p>
+            <img src="~/Content/empty-cart.png" />
+        </div>
+    </div>
+}
+else
+{
+    <table class="table">
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    <img src="@item.ImageURL" />
+
+                </td>
+                <td>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Developer)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </p>
+                </td>
+                <td>
+                    <div>
+                        $@Html.DisplayFor(modelItem => item.Price)
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.ActionLink("Remove from Cart", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </div>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                @{double sum = 0;}
+
+                @foreach (var item in Model)
+                {
+
+                    sum += item.Price;
+
+                }
+                <div>Total:<br />$@sum</div>
+            </td>
+            <td>
+                <div>
+                    <button class="js-checkout btn btn-warning">Proceed To Checkout</button>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+    <div id="modal-dialog">
+        <p>Are you sure you want to purchase the following products:</p>
+        <ul>
+            @foreach(var item in Model)
+                {
+                    <li>@item.Name, <b>$@item.Price</b></li>
+                }
+        </ul>
+        <p><b>Total: $@sum</b></p>
+    </div>
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#modal-dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                title: 'Confirm Checkout',
+                buttons: {
+                    Back: function () {
+                        $("#modal-dialog").dialog('close');
+                    },
+                    Purchase: function () {
+                        $.ajax({
+                            url: "/PurchasedProducts/EmptyCart",
+                            method: "GET",
+                            success: function () {
+
+                            }
+                        });
+                        $(document).ajaxStop(function () {
+                            window.location.reload();
+                        });
+                    }
+                }
+            });
+            $(".js-checkout").on("click", function () {
+                $("#modal-dialog").dialog('open');
+            })
+
+            $(".ui-dialog-buttonset").children().addClass("btn btn-danger");
+        })
+    </script>
+}
+
+
+
+<style>
+
+    .ui-dialog-titlebar {
+        background: #801616;
+    }
+
+    .ui-dialog-titlebar-close{
+        display: none;
+    }
+
+    .empty-cart {
+        text-align: center;
+        height: 800px;
+    }
+
+    .empty-cart-title {
+        font-size: 70px;
+        font-weight: 600;
+    }
+
+    .empty-cart-text {
+        font-size: 30px;
+    }
+
+    .empty-cart-content {
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .empty-cart img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn-danger a, .btn-warning a {
+        color: white !important;
+    }
+
+    .table {
+        margin-top: 50px;
+        padding: 30px;
+        background-color: #18161d;
+        border-radius: 2%;
+    }
+
+    th {
+        text-align: center;
+        border: none !important;
+    }
+
+    td p:first-of-type, td div:first-of-type {
+        font-weight: bold;
+    }
+
+    td div {
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    td {
+        border: none !important;
+        height: 140px;
+        width: 250px;
+        text-align: center;
+    }
+
+    img {
+        width: 250px;
+        height: 139px;
+        border-radius: 3%;
+    }
+</style>

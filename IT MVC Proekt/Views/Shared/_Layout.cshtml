@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bnri.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>BNRI - Largest Online Game Store</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/LibraryStyle.css")
+    @Styles.Render("~/Content/HomeStyle.css")
+    <style>
+
+        html{
+            scroll-behavior: smooth;
+        }
+
+        .body-content {
+            min-height: calc(100vh - 40px);
+        }
+
+        ::-webkit-scrollbar {
+            width: 1rem;
+            background-color: white;
+            border-radius: .5rem;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,152,0.5);
+            border-radius: .5rem;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(0, 0, 152);
+        }
+
+        .navbar {
+            background-color: #110f16;
+            border: none;
+            opacity: 75%;
+        }
+
+        .home-button {
+            margin-top: 10px;
+            margin-right: 10px;
+            background-image: url("/Content/BNRI12.png");
+            width: 64px;
+            height: 25px;
+            background-size: contain;
+        }
+
+        #footer {
+            height: 23px;
+        }
+
+
+        #socials li{
+            display: inline-block;
+            margin: 10px;
+        }
+
+        #socials li a i {
+            color: #801616;
+        }
+
+        #footer p{
+            margin: 0 0 -35px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(" ", "Index", new { Controller = "Games" }, new { @class = "home-button" })</li>
+                    <li>@Html.ActionLink(" Games", "Games", new { Controller = "Games" }, new { @class = "glyphicon glyphicon-th" })</li>
+                    <li>@Html.ActionLink(" Cart", "Index", new { Controller = "PurchasedProducts" }, new { @class = "glyphicon glyphicon-shopping-cart" })</li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink(" Users", "AddUserToRole", new { Controller = "Account" }, new { @class = "glyphicon glyphicon-user" })</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <div id="footer">
+            <p class="text-center">&copy; @DateTime.Now.Year - BNRI</p>
+            <ul class="text-right" id="socials">
+                <li><a href="https://www.facebook.com/bojanrist"><i class="fa fa-lg fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/BNRI7"><i class="fa fa-lg fa-twitter"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/bojan-ristevski-951287203/"><i class="fa fa-lg fa-linkedin"></i></a></li>
+                <li><a href="https://www.instagram.com/_bnri_/?hl=en"><i class="fa fa-lg fa-instagram"></i></a></li>
+            </ul>
+    </div>
+    
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

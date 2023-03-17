@@ -1,0 +1,231 @@
+﻿@model IT_MVC_Proekt.Models.Game
+
+@{
+    ViewBag.Title = "Details";
+}
+<body>
+    <section id="header"></section>
+    <div class="text-box">
+        @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+        {
+            @Html.ActionLink("Edit", "Edit", "Games", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        }
+        <h1>@Model.Name</h1>
+        <p><a href="#main">View more</a></p>
+    </div>
+
+    <div id="main">
+        <section class="details">
+            <p>
+                @Model.LongDesc
+            </p>
+
+        </section>
+        <section class="side-panel">
+            <ul>
+                <li>
+                    Developers: <br />
+                    @Model.Developer
+                </li>
+                <li>
+                    Release Date: <br />
+                    @Model.Date
+                </li>
+                <li>
+                    Genre: <br />
+                    @Model.Genre
+                </li>
+            </ul>
+            <p>Price: $@Model.Price</p>
+            <p class="btn btn-danger">@Html.ActionLink("Add To Cart", "Create", "PurchasedProducts", new { id = Model.Id, returnUrl = Request.RawUrl }, new {})</p>
+        </section>
+    </div>
+    <div class="screenshots">
+        <p></p>
+    </div>
+    <div>
+        <input type="radio" id="s-1" name="slider-control" checked="checked">
+        <input type="radio" id="s-2" name="slider-control">
+        <input type="radio" id="s-3" name="slider-control">
+        <div class="js-slider">
+            <figure class="js-slider_item img-1">
+                <div class="js-slider_img">
+                    <img class="c-img-w-full" src="@Model.Screenshot1" alt="">
+                </div>
+            </figure>
+            <figure class="js-slider_item img-2">
+                <div class="js-slider_img">
+                    <img class="c-img-h-full" src="@Model.Screenshot2" alt="">
+                </div>
+            </figure>
+            <figure class="js-slider_item img-3">
+                <div class="js-slider_img">
+                    <img class="c-img-h-full" src="@Model.Screenshot3" alt="">
+                </div>
+            </figure>
+            <div class="js-slider_nav">
+                <label class="js-slider_nav_item s-nav-1 prev" for="s-3"></label>
+                <label class="js-slider_nav_item s-nav-1 next" for="s-2"></label>
+                <label class="js-slider_nav_item s-nav-2 prev" for="s-1"></label>
+                <label class="js-slider_nav_item s-nav-2 next" for="s-3"></label>
+                <label class="js-slider_nav_item s-nav-3 prev" for="s-2"></label>
+                <label class="js-slider_nav_item s-nav-3 next" for="s-1"></label>
+            </div>
+            <div class="js-slider_indicator">
+                <div class="js-slider-indi indi-1"></div>
+                <div class="js-slider-indi indi-2"></div>
+                <div class="js-slider-indi indi-3"></div>
+            </div>
+        </div>
+
+    </div>
+    <style>
+        #header {
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient( rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7) ), url("@Model.DescImg");
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            margin-top: -30px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: "PT Sans", sans-serif;
+        }
+
+        body {
+            background-color: #110f16;
+        }
+
+        .text-box {
+            width: 90%;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .text-box h1 {
+            font-size: 70px;
+            font-family: "PT Sans", sans-serif;
+        }
+
+        .text-box a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .text-box p {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-family: "PT Sans", sans-serif;
+            text-transform: uppercase;
+            border: 1px solid white;
+            width: 10%;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 5%;
+            margin: auto;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .text-box p:hover {
+            background: #801616;
+            transition: 1s;
+            color: white;
+        }
+
+        .details {
+            color: white;
+            width: 1000px;
+            margin: auto;
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .details p {
+            font-size: 27px;
+            font-family: "PT Sans", sans-serif;
+            color: white;
+            font-weight: 300;
+            text-align: justify;
+            padding-right: 50px;
+            margin-top: -60px;
+        }
+
+        #main {
+            display: flex;
+            justify-content: space-evenly;
+            width: 1200px;
+            margin: auto;
+        }
+
+        .screenshots p {
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .screenshots {
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .side-panel {
+            color: white;
+            font-size: 20px;
+            background-color: #18161d;
+            height: 400px;
+            width: 300px;
+            padding: 20px;
+            margin-top: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 2%;
+        }
+
+        .side-panel .button {
+            border: 1px solid white;
+            width: 120px;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgb(241, 114, 10);
+            border-radius: 5%;
+            cursor: pointer;
+        }
+
+        .side-panel ul {
+            text-align: left;
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-bottom: 100px;
+        }
+
+        .side-panel ul li {
+            margin-top: 5px;
+        }
+
+         .body-content {
+             width: 100%;
+             padding: 0;
+         }
+
+         .btn-danger a{
+             color: white;
+         }
+    </style>
+</body>
+
